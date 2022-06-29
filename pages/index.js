@@ -16,6 +16,7 @@ export default {
         password: '',
       },
       success: false,
+      error: false,
       checkLogin: true
     }
   },
@@ -26,6 +27,7 @@ export default {
 
       this.form.email = '';
       this.form.password = '';
+      this.error = false;
       this.success = true;
     },
 
@@ -37,6 +39,9 @@ export default {
 
       if (user !== false) {
         this.$router.push('/slides')
+      } else {
+        this.success = false;
+        this.error = true;
       }
     }
   }
