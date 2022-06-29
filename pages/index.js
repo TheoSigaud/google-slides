@@ -1,4 +1,4 @@
-import { registerUser } from "../firebase/firebase";
+import { registerUser, loginUser } from "../firebase/firebase";
 
 export default {
   name: 'IndexPage',
@@ -14,20 +14,29 @@ export default {
         email: '',
         password: '',
       },
+      success: false,
+      checkLogin: true
     }
   },
 
   methods: {
-    async handleRegister(e) {
-      console.log('mmmm');
-      e.preventDefault();
+    async handleRegister() {
+      const user = await registerUser(this.form.email, this.form.password);
 
-      const email = e.target.querySelector('input[type="email"]').value;
-      const password = e.target.querySelector('input[type="password"]').value;
+      this.form.email = '';
+      this.form.password = '';
+      this.success = true;
+    },
 
-      const user = await registerUser(email, password);
+    async handleLogin() {
+      const user = await loginUser(this.login.email, this.login.password);
 
-      this.$router.push("/")
+      this.login.email = '';
+      this.login.password = '';
+
+      if (user !== false) {
+        this.$router.push('/slides')
+      }
     }
   }
 }
