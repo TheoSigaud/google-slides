@@ -11,6 +11,7 @@ import {
 import {
   getAuth,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   setPersistence,
   browserLocalPersistence,
   onAuthStateChanged,
@@ -39,5 +40,17 @@ export function registerUser(email, password) {
     return createUserWithEmailAndPassword(auth, email, password).then(
       (user) => user
     );
+  });
+}
+
+export function loginUser(email, password) {
+  return setPersistence(auth, browserLocalPersistence).then(() => {
+    return signInWithEmailAndPassword(auth, email, password).then((user) => user)
+      .catch((error) => {
+        const errorCode = error.code;
+        if(errorCode === 'auth/user-not-found' || errorCode === 'auth/wrong-password'){
+          return false;
+        }
+      });
   });
 }
