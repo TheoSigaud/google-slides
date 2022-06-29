@@ -1,9 +1,9 @@
 <template>
-  <Tutorial/>
+  <div>
+  <b-navbar toggleable="lg" type="dark" variant="info">
+    <b-navbar-brand href="#">Google Slides</b-navbar-brand>
+  </b-navbar>
+</div>
 </template>
 
-<script>
-export default {
-  name: 'IndexPage'
-}
-</script>
+<script src="./index.js"></script>
