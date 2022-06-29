@@ -37,9 +37,26 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    'bootstrap-vue/nuxt'
+    [
+      'bootstrap-vue/nuxt',
+      '@nuxtjs/firebase',
+      {
+        config: {
+          apiKey: "AIzaSyAeymUKTWh1WQa61hcsDCVlC8ipbxfsUs8",
+          authDomain: "pwa-googe-slide.firebaseapp.com",
+          projectId: "pwa-googe-slide",
+          storageBucket: "pwa-googe-slide.appspot.com",
+          messagingSenderId: "1052585376279",
+          appId: "1:1052585376279:web:723c4d94293c6164b07a52",
+          //measurementId: '<measurementId>'
+        },
+        services: {
+          auth: true, // Just as example. Can be any other service.
+          database: true, // Just as example. Can be any other service.
+        }
+      }
+    ]
   ],
-
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }
