@@ -25,7 +25,10 @@ const database = getDatabase(app);
 const auth = getAuth(app);
 
 export function getUser() {
-  return auth.currentUser;
+  onAuthStateChanged(auth, (user) => {
+    return auth
+  });
+ 
 }
 
 export function getAuthState(cb = () => {}) {
@@ -44,25 +47,32 @@ export function registerUser(email, password) {
       switch (errorCode) {
         case 'auth/weak-password':
           return 'auth/weak-password';
-          break;
         case 'auth/email-already-in-use':
           return 'auth/email-already-in-use';
-          break;
       }
     })
   });
 }
 
 export async function getDocuments() {
+  console.log(getUser());
   const documents = [];
-  onChildAdded(ref(database, "/documents"), (snapshot) => {
-    documents.push({ value : snapshot.val(), key: snapshot.key });
+ 
+  // onChildAdded(ref(database, "users/" + getUser().uid + '/documents'), (snapshot) => {
+  //   documents.push({ value : snapshot.val(), key: snapshot.key });
+  //   console.log(documents);
+  // });
 
-    console.log(documents);
-  });
-
-  return documents
+  // return documents
 }
+
+export async function writeDocuments({name}){
+  push(ref(database, 'users/' + getUser().uid + '/documents'), {
+    name
+  });
+}
+
+
 export function loginUser(email, password) {
   return setPersistence(auth, browserLocalPersistence).then(() => {
     return signInWithEmailAndPassword(auth, email, password).then((user) => user)
@@ -73,16 +83,4 @@ export function loginUser(email, password) {
         }
       });
   });
-}
-
-export function writeUser({ email }) {
-  const key = push(ref(database, "/users"));
-
-  set(key, User({ email }));
-}
-
-function User({ email }) {
-  return {
-    email
-  };
 }

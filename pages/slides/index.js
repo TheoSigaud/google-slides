@@ -1,4 +1,6 @@
-import { getDocuments } from "../../firebase/firebase";
+
+
+import { writeDocuments, getDocuments } from "../../firebase/firebase"
 
 export default {
     name: 'DisplaySlides', 
@@ -14,7 +16,7 @@ export default {
     mounted: async function() {
         
         await getDocuments((documents) => {
-            console.log(documents);
+           
             this.documents = [...documents];
         });
 
@@ -25,7 +27,7 @@ export default {
     methods:{
         onSubmit(event) {
             event.preventDefault()
-            alert(JSON.stringify(this.form))
+            writeDocuments({name : this.form.name})
         },
     }
 }
