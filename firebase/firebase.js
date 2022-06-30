@@ -41,3 +41,16 @@ export function registerUser(email, password) {
     );
   });
 }
+
+
+
+export async function getDocuments() {
+  const documents = [];
+  onChildAdded(ref(database, "/documents"), (snapshot) => {
+    documents.push({ value : snapshot.val(), key: snapshot.key });
+
+    console.log(documents);
+  });
+
+  return documents
+}
