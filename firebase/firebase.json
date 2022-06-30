@@ -1,6 +1,7 @@
 {
   "apiKey": "AIzaSyCpfxJWoAn7EXN087a-FYPSXWAu5GO7p2Q",
   "authDomain": "pwa--slides.firebaseapp.com",
+  "databaseURL": "https://pwa--slides-default-rtdb.europe-west1.firebasedatabase.app",
   "projectId": "pwa--slides",
   "storageBucket": "pwa--slides.appspot.com",
   "messagingSenderId": "438468509281",
