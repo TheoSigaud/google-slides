@@ -6,8 +6,7 @@ export default function ({ store, redirect }) {
 
   getAuthState((user) => {
     isUserLogged = user;
-
-    console.log(isUserLogged)
+    
     if (!isUserLogged) {
       return redirect('/')
     }

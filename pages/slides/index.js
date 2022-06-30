@@ -2,6 +2,7 @@ import { getDocuments } from "../../firebase/firebase";
 
 export default {
     name: 'DisplaySlides', 
+    middleware: 'authenticated',
     data() {
         return {
             form: {
