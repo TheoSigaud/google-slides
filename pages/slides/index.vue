@@ -9,9 +9,9 @@
         </b-navbar>
         <b-modal ok-only id="modal-1" title="Nouvelle présentation">
             <div>
-                <b-form>
+                <b-form @submit="onSubmit">
                     <b-form-group id="input-group-1" label="Nom du document :">
-                        <b-form-input id="input-1" type="text" required></b-form-input>
+                        <b-form-input  v-model="form.name" id="input-1" type="text" required></b-form-input>
                     </b-form-group>
                     <b-button type="submit" class="btn-slide">Créer</b-button>
                 </b-form>
@@ -20,4 +20,5 @@
     </div>
 </template>
 
+<script src="./index.js"></script>
 

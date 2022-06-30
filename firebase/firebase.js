@@ -43,6 +43,18 @@ export function registerUser(email, password) {
   });
 }
 
+
+
+export async function getDocuments() {
+  const documents = [];
+  onChildAdded(ref(database, "/documents"), (snapshot) => {
+    documents.push({ value : snapshot.val(), key: snapshot.key });
+
+    console.log(documents);
+  });
+
+  return documents
+}
 export function loginUser(email, password) {
   return setPersistence(auth, browserLocalPersistence).then(() => {
     return signInWithEmailAndPassword(auth, email, password).then((user) => user)
