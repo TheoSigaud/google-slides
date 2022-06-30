@@ -39,11 +39,19 @@ export function registerUser(email, password) {
   return setPersistence(auth, browserLocalPersistence).then(() => {
     return createUserWithEmailAndPassword(auth, email, password).then(
       (user) => user
-    );
+    ).catch(error => {
+      const errorCode = error.code;
+      switch (errorCode) {
+        case 'auth/weak-password':
+          return 'auth/weak-password';
+          break;
+        case 'auth/email-already-in-use':
+          return 'auth/email-already-in-use';
+          break;
+      }
+    })
   });
 }
-
-
 
 export async function getDocuments() {
   const documents = [];
@@ -65,4 +73,16 @@ export function loginUser(email, password) {
         }
       });
   });
+}
+
+export function writeUser({ email }) {
+  const key = push(ref(database, "/users"));
+
+  set(key, User({ email }));
+}
+
+function User({ email }) {
+  return {
+    email
+  };
 }
