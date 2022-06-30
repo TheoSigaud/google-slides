@@ -1,4 +1,4 @@
-import { registerUser, loginUser } from "../firebase/firebase";
+import { registerUser, loginUser, writeUser } from "../firebase/firebase";
 
 export default {
   name: 'IndexPage',
@@ -25,10 +25,22 @@ export default {
     async handleRegister() {
       const user = await registerUser(this.form.email, this.form.password);
 
-      this.form.email = '';
-      this.form.password = '';
-      this.error = false;
-      this.success = true;
+      if (user === 'auth/email-already-in-use') {
+        this.success = false;
+        this.error = 'Email already exist';
+      }else if (user === 'auth/weak-password') {
+        this.success = false;
+        this.error = 'weak password';
+      }else {
+        writeUser({
+          email: this.form.email
+        });
+
+        this.form.email = '';
+        this.form.password = '';
+        this.error = false;
+        this.success = true;
+      }
     },
 
     async handleLogin() {
@@ -41,7 +53,7 @@ export default {
         this.$router.push('/slides')
       } else {
         this.success = false;
-        this.error = true;
+        this.error = 'Incorrect identification';
       }
     }
   }

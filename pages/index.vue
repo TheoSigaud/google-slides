@@ -12,7 +12,7 @@
       <section>
         <div class="container">
           <b-alert variant="success" show v-if="success">Success register</b-alert>
-          <b-alert variant="danger" show v-if="error">Incorrect identification</b-alert>
+          <b-alert variant="danger" show v-if="error">{{error}}</b-alert>
 
           <div class="d-flex justify-content-center mt-5">
             <div v-if="checkLogin">
