@@ -4,9 +4,11 @@ import {
   set,
   ref,
   push,
+  update,
   serverTimestamp,
   onValue,
   onChildAdded,
+  onChildRemoved,
 } from "firebase/database";
 import {
   getAuth,
@@ -70,6 +72,12 @@ export async function writeDocuments({name}){
     name
   });
 
+}
+
+export async function removeDocument({uid}){
+  const updates = {};
+  updates['users/' + getUser().uid + '/documents/' + uid] = null;
+  return update(ref(database), updates);
 }
 
 

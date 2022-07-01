@@ -22,6 +22,7 @@
             <b-row>
                 <b-col v-for="document in documents" :key="document.key">
                     <b-card
+                        v-bind:id="document.key"
                         title="test"
                         tag="article"
                         class="mb-2"
@@ -32,6 +33,7 @@
                         </b-card-text>
 
                         <b-button href="#" variant="primary">Voir</b-button>
+                        <b-button v-on:click="remove(document.key)" variant="danger">Supprimer</b-button>
                     </b-card>
                 </b-col>
             </b-row>

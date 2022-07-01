@@ -1,4 +1,4 @@
-import { writeDocuments, getDocuments } from "../../firebase/firebase"
+import { writeDocuments, getDocuments, removeDocument } from "../../firebase/firebase"
 
 export default {
     name: 'DisplaySlides',
@@ -23,5 +23,11 @@ export default {
             event.preventDefault()
             writeDocuments({name : this.form.name})
         },
+        remove: function(uid){
+            removeDocument({uid});
+            const card = document.getElementById(uid);
+            card.parentNode.removeChild(card);
+        
+        }
     }
 }
