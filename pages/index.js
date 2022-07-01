@@ -1,8 +1,7 @@
-import { registerUser, loginUser, writeUser } from "../firebase/firebase";
+import { registerUser, loginUser } from "../firebase/firebase";
 
 export default {
   name: 'IndexPage',
-  middleware: 'checkLogin',
 
   data() {
     return {
@@ -32,10 +31,6 @@ export default {
         this.success = false;
         this.error = 'weak password';
       }else {
-        writeUser({
-          email: this.form.email
-        });
-
         this.form.email = '';
         this.form.password = '';
         this.error = false;
