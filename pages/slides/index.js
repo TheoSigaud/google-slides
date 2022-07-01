@@ -1,10 +1,8 @@
-
-
 import { writeDocuments, getDocuments } from "../../firebase/firebase"
 
 export default {
-    name: 'DisplaySlides', 
-    middleware: 'authenticated',
+    name: 'DisplaySlides',
+
     data() {
         return {
             form: {
@@ -12,18 +10,15 @@ export default {
             },
             documents:[]
         }
-    }, 
+    },
     mounted: async function() {
-        
+
         await getDocuments((documents) => {
-           
+
             this.documents = [...documents];
         });
-
-
-       
-        
     },
+
     methods:{
         onSubmit(event) {
             event.preventDefault()

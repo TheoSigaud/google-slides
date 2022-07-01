@@ -2,7 +2,6 @@ import { registerUser, loginUser } from "../firebase/firebase";
 
 export default {
   name: 'IndexPage',
-  //middleware: 'checkLogin',
 
   data() {
     return {
