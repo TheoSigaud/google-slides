@@ -17,6 +17,24 @@
                 </b-form>
             </div>
         </b-modal>
+        <b-container class="mt-5">
+            <b-row>
+                <b-col v-for="document in documents" :key="document.key">
+                    <b-card
+                        title="test"
+                        tag="article"
+                        class="mb-2"
+                        style="width: 20rem;"
+                    >
+                        <b-card-text>
+                            {{document.value.name}}
+                        </b-card-text>
+
+                        <b-button href="#" variant="primary">Voir</b-button>
+                    </b-card>
+                </b-col>
+            </b-row>
+        </b-container>
     </div>
 </template>
 

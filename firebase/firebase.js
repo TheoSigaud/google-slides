@@ -25,9 +25,8 @@ const database = getDatabase(app);
 const auth = getAuth(app);
 
 export function getUser() {
-  onAuthStateChanged(auth, (user) => {
-    return auth
-  });
+ 
+   return auth.currentUser;
  
 }
 
@@ -54,22 +53,23 @@ export function registerUser(email, password) {
   });
 }
 
-export async function getDocuments() {
-  console.log(getUser());
-  const documents = [];
- 
-  // onChildAdded(ref(database, "users/" + getUser().uid + '/documents'), (snapshot) => {
-  //   documents.push({ value : snapshot.val(), key: snapshot.key });
-  //   console.log(documents);
-  // });
+export async function getDocuments(cb = () => {}) {
+  onAuthStateChanged(auth, (user) => {
+    const documents = [];
+    onChildAdded(ref(database, "users/" + user.uid + '/documents'), (snapshot) => {
+      documents.push({ value : snapshot.val(), key: snapshot.key });
+      cb(documents);
+    });
 
-  // return documents
+  });
+
 }
 
 export async function writeDocuments({name}){
-  push(ref(database, 'users/' + getUser().uid + '/documents'), {
+    push(ref(database, 'users/' + getUser().uid + '/documents'), {
     name
   });
+
 }
 
 

@@ -16,9 +16,9 @@ export default {
     mounted: async function() {
         
         await getDocuments((documents) => {
-           
             this.documents = [...documents];
         });
+        
 
 
        
