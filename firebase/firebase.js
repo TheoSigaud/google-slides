@@ -28,9 +28,9 @@ const database = getDatabase(app);
 const auth = getAuth(app);
 
 export function getUser() {
- 
+
    return auth.currentUser;
- 
+
 }
 
 export function getAuthState(cb = () => {}) {
@@ -74,8 +74,12 @@ export async function getDocuments(cb = () => {}) {
 }
 
 export async function writeDocuments({name}){
-    push(ref(database, 'users/' + getUser().uid + '/documents'), {
+  const id = push(ref(database, 'users/' + getUser().uid + '/documents'), {
     name
+  });
+  console.log(id.key);
+  push(ref(database, 'users/' + getUser().uid + '/documents/' + id.key + '/slides'), {
+    data : ''
   });
 
 }
