@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import CKEditor from '@ckeditor/ckeditor5-vue2';
-import { getSlides } from "../../firebase/firebase"
+import { getSlides, writeSlide, removeSlide } from "../../firebase/firebase"
 
 
 Vue.use(CKEditor);
@@ -11,17 +11,29 @@ export default ({
 
   data() {
     return {
-      slides:[]
+      slides:[],
+      id: this.$route.params.id
     }
   },
 
   mounted: async function() {
-    const id = this.$route.params.id;
-
-    await getSlides((slides) => {
-      this.slides = [...slides];
-    }, id);
+    await this.getDoc();
   },
 
-  methods: {}
+  methods: {
+    async addSlide(){
+      await writeSlide(this.id)
+    },
+
+    async deleteSlide(key){
+      await removeSlide(this.id, key);
+      await this.getDoc();
+    },
+
+    async getDoc(){
+      await getSlides((slides) => {
+        this.slides = [...slides];
+      }, this.id);
+    }
+  }
 })

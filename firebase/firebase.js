@@ -87,11 +87,16 @@ export async function writeDocuments({name}){
   const id = push(ref(database, 'users/' + getUser().uid + '/documents'), {
     name
   });
-  console.log(id.key);
+
   push(ref(database, 'users/' + getUser().uid + '/documents/' + id.key + '/slides'), {
     data : ''
   });
+}
 
+export async function writeSlide(id){
+  push(ref(database, 'users/' + getUser().uid + '/documents/' + id + '/slides'), {
+    data : ''
+  });
 }
 
 export async function removeDocument({uid}){
@@ -100,6 +105,11 @@ export async function removeDocument({uid}){
   return update(ref(database), updates);
 }
 
+export async function removeSlide(id, key){
+  const updates = {};
+  updates['users/' + getUser().uid + '/documents/' + id + '/slides/' + key] = null;
+  return update(ref(database), updates);
+}
 
 export function loginUser(email, password) {
   return setPersistence(auth, browserLocalPersistence).then(() => {
