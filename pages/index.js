@@ -1,4 +1,4 @@
-import { registerUser, loginUser } from "../firebase/firebase";
+import { registerUser, loginUser, logout} from "../firebase/firebase";
 
 export default {
   name: 'IndexPage',

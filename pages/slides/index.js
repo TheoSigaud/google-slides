@@ -1,4 +1,4 @@
-import { writeDocuments, getDocuments, removeDocument } from "../../firebase/firebase"
+import { writeDocuments, getDocuments, removeDocument, logout } from "../../firebase/firebase"
 
 export default {
     name: 'DisplaySlides',
@@ -19,6 +19,10 @@ export default {
     },
 
     methods:{
+        async logout(){
+            logout();
+        },
+        
         onSubmit(event) {
             event.preventDefault()
             writeDocuments({name : this.form.name})

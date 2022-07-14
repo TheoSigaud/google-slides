@@ -12,6 +12,7 @@ import {
 } from "firebase/database";
 import {
   getAuth,
+  signOut,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   setPersistence,
@@ -38,6 +39,11 @@ export function getAuthState(cb = () => {}) {
     cb(false);
   });
 }
+
+export function logout(){
+    signOut(auth);
+}
+
 
 export function registerUser(email, password) {
   return setPersistence(auth, browserLocalPersistence).then(() => {
