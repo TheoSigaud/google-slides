@@ -32,7 +32,7 @@
                             {{document.value.name}}
                         </b-card-text>
 
-                        <b-button :to="{ path: 'editor', query: { id: document.key }}" variant="primary">Voir</b-button>
+                        <b-button :to="'/slides/'+document.key" variant="primary">Voir</b-button>
                         <b-button v-on:click="remove(document.key)" variant="danger">Supprimer</b-button>
                     </b-card>
                 </b-col>
