@@ -28,9 +28,9 @@ const database = getDatabase(app);
 const auth = getAuth(app);
 
 export function getUser() {
- 
+
    return auth.currentUser;
- 
+
 }
 
 export function getAuthState(cb = () => {}) {
@@ -70,14 +70,33 @@ export async function getDocuments(cb = () => {}) {
     });
 
   });
+}
 
+export async function getSlides(cb = () => {}, id) {
+  onAuthStateChanged(auth, (user) => {
+    const slides = [];
+    onChildAdded(ref(database, "users/" + user.uid + '/documents/' + id + '/slides'), (snapshot) => {
+      slides.push({ value : snapshot.val(), key: snapshot.key });
+      cb(slides);
+    });
+
+  });
 }
 
 export async function writeDocuments({name}){
-    push(ref(database, 'users/' + getUser().uid + '/documents'), {
+  const id = push(ref(database, 'users/' + getUser().uid + '/documents'), {
     name
   });
 
+  push(ref(database, 'users/' + getUser().uid + '/documents/' + id.key + '/slides'), {
+    data : ''
+  });
+}
+
+export async function writeSlide(id){
+  push(ref(database, 'users/' + getUser().uid + '/documents/' + id + '/slides'), {
+    data : ''
+  });
 }
 
 export async function removeDocument({uid}){
@@ -86,6 +105,11 @@ export async function removeDocument({uid}){
   return update(ref(database), updates);
 }
 
+export async function removeSlide(id, key){
+  const updates = {};
+  updates['users/' + getUser().uid + '/documents/' + id + '/slides/' + key] = null;
+  return update(ref(database), updates);
+}
 
 export function loginUser(email, password) {
   return setPersistence(auth, browserLocalPersistence).then(() => {
