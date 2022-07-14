@@ -1,6 +1,8 @@
 import { registerUser, loginUser } from "../firebase/firebase";
 
 export default {
+  layout: 'nav',
+
   name: 'IndexPage',
 
   data() {

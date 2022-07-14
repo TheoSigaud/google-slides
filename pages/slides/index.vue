@@ -31,7 +31,7 @@
                             {{document.value.name}}
                         </b-card-text>
 
-                        <b-button href="#" variant="primary">Voir</b-button>
+                      <b-button :to="{ path: 'editor', query: { id: document.value.name }}" variant="primary">Voir</b-button>
                     </b-card>
                 </b-col>
             </b-row>
