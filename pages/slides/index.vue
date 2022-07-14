@@ -2,8 +2,9 @@
     <div>
         <b-navbar toggleable="lg" type="dark" variant="info">
             <b-navbar-brand href="#">Google Slides</b-navbar-brand>
-
+        
             <b-navbar-nav class="ml-auto">
+                <b-button class="mx-2" @click="logout" variant="danger">Déconnexion</b-button>
                 <b-button class="btn-slide" type="submit" v-b-modal.modal-1 >Nouveau document</b-button>
             </b-navbar-nav>
         </b-navbar>
@@ -22,6 +23,7 @@
             <b-row>
                 <b-col v-for="document in documents" :key="document.key">
                     <b-card
+                        v-bind:id="document.key"
                         title="test"
                         tag="article"
                         class="mb-2"
@@ -31,7 +33,8 @@
                             {{document.value.name}}
                         </b-card-text>
 
-                        <b-button href="#" variant="primary">Voir</b-button>
+                        <b-button class="btn-slide"><a v-bind:href="'/slides/'+ document.key">Voir</a></b-button>
+                        <b-button v-on:click="remove(document.key)" variant="danger">Supprimer</b-button>
                     </b-card>
                 </b-col>
             </b-row>

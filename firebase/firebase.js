@@ -4,12 +4,15 @@ import {
   set,
   ref,
   push,
+  update,
   serverTimestamp,
   onValue,
   onChildAdded,
+  onChildRemoved,
 } from "firebase/database";
 import {
   getAuth,
+  signOut,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   setPersistence,
@@ -36,6 +39,11 @@ export function getAuthState(cb = () => {}) {
     cb(false);
   });
 }
+
+export function logout(){
+    signOut(auth);
+}
+
 
 export function registerUser(email, password) {
   return setPersistence(auth, browserLocalPersistence).then(() => {
@@ -70,6 +78,12 @@ export async function writeDocuments({name}){
     name
   });
 
+}
+
+export async function removeDocument({uid}){
+  const updates = {};
+  updates['users/' + getUser().uid + '/documents/' + uid] = null;
+  return update(ref(database), updates);
 }
 
 
