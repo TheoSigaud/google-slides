@@ -9,6 +9,8 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^34.2.0",
+    "@ckeditor/ckeditor5-vue2": "^3.0.1",
     "bootstrap-vue": "^2.22.0",
     "core-js": "^3.19.3",
     "firebase": "^9.8.4",

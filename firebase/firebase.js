@@ -70,7 +70,17 @@ export async function getDocuments(cb = () => {}) {
     });
 
   });
+}
 
+export async function getSlides(cb = () => {}, id) {
+  onAuthStateChanged(auth, (user) => {
+    const slides = [];
+    onChildAdded(ref(database, "users/" + user.uid + '/documents/' + id + '/slides'), (snapshot) => {
+      slides.push({ value : snapshot.val(), key: snapshot.key });
+      cb(slides);
+    });
+
+  });
 }
 
 export async function writeDocuments({name}){
