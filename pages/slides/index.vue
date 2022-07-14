@@ -22,6 +22,7 @@
             <b-row>
                 <b-col v-for="document in documents" :key="document.key">
                     <b-card
+                        v-bind:id="document.key"
                         title="test"
                         tag="article"
                         class="mb-2"
@@ -31,7 +32,8 @@
                             {{document.value.name}}
                         </b-card-text>
 
-                      <b-button :to="{ path: 'editor', query: { id: document.value.name }}" variant="primary">Voir</b-button>
+                        <b-button :to="{ path: 'editor', query: { id: document.key }}" variant="primary">Voir</b-button>
+                        <b-button v-on:click="remove(document.key)" variant="danger">Supprimer</b-button>
                     </b-card>
                 </b-col>
             </b-row>
