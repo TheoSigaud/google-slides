@@ -13,13 +13,15 @@ export default ({
       slides:[],
       id: this.$route.params.id,
       dataEditor: '',
-      keySlide: ''
+      keySlide: '',
+      oldData: ''
     }
   },
 
   watch: {
     slides(value) {
       this.keySlide = value[0].key;
+      this.oldData = value[0].value.data;
     },
 
     async dataEditor(value) {
@@ -28,7 +30,7 @@ export default ({
   },
 
   mounted: async function() {
-    const docs = await this.getDoc();
+    await this.getDoc();
   },
 
   methods: {

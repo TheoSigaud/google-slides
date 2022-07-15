@@ -18,7 +18,7 @@
         </b-col>
 
         <b-col col sm="10">
-          <CkEditor @data="returnData"/>
+          <CkEditor @data="returnData" :oldData="oldData"/>
 
         </b-col>
       </b-row>
