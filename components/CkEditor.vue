@@ -10,6 +10,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default {
   name: 'CkEditor',
+  props: ['oldData'],
 
   data() {
     return {
@@ -25,6 +26,10 @@ export default {
   watch: {
     editorData(value) {
       this.$emit('data', value);
+    },
+
+    oldData(value) {
+      this.editorData = value;
     }
   }
 }
