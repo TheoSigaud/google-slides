@@ -5,18 +5,27 @@
 </template>
 
 <script>
+
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default {
-  name: 'ckeditor-app',
+  name: 'CkEditor',
+
   data() {
     return {
       editor: ClassicEditor,
       editorData: '',
       editorConfig: {
         // The configuration of the editor.
-      }
+      },
+      newData: ''
     };
+  },
+
+  watch: {
+    editorData(value) {
+      this.$emit('data', value);
+    }
   }
 }
 </script>
