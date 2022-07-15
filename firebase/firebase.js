@@ -99,6 +99,12 @@ export async function writeSlide(id){
   });
 }
 
+export async function writeData(id, keySlide, data){
+  update(ref(database, 'users/' + getUser().uid + '/documents/' + id + '/slides/' + keySlide), {
+    data : data
+  });
+}
+
 export async function removeDocument({uid}){
   const updates = {};
   updates['users/' + getUser().uid + '/documents/' + uid] = null;
