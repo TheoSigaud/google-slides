@@ -20,10 +20,10 @@
         </b-modal>
         <b-container class="mt-5">
             <b-row>
-                <b-col v-for="document in documents" :key="document.key">
+                <b-col v-for="(document, id) in documents" :key="document.key">
                     <b-card
                         v-bind:id="document.key"
-                        title="test"
+                        :title="'Diaporama n°' +(id+1)"
                         tag="article"
                         class="mb-2"
                         style="width: 20rem;"

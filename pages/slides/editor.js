@@ -10,18 +10,20 @@ export default ({
 
   data() {
     return {
+      debug: false,
       slides:[],
       id: this.$route.params.id,
       dataEditor: '',
       keySlide: '',
-      oldData: ''
+      oldData: '',
+      indexSlide : 0
     }
   },
 
   watch: {
     slides(value) {
-      this.keySlide = value[0].key;
-      this.oldData = value[0].value.data;
+      this.keySlide = value[this.indexSlide].key;
+      this.oldData = value[this.indexSlide].value.data;
     },
 
     async dataEditor(value) {
@@ -36,6 +38,12 @@ export default ({
   methods: {
     async addSlide(){
       await writeSlide(this.id)
+    },
+
+    async changeSlide(i){
+      if (this.debug) console.log("changement de slide " + i)
+      this.indexSlide = i;
+      await this.getDoc();
     },
 
     async deleteSlide(key){
