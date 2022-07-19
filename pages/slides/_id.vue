@@ -2,7 +2,6 @@
   <div>
     <div class="px-5 pt-5">
       <h1>{{ "Slide n°" + (indexSlide+1)  }}</h1>
-
       <b-row>
         <b-col col sm="2">
           <b-nav vertical>
