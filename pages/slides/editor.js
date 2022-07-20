@@ -22,8 +22,10 @@ export default ({
 
   watch: {
     slides(value) {
-      this.keySlide = value[this.indexSlide].key;
-      this.oldData = value[this.indexSlide].value.data;
+      if(value[this.indexSlide].key){
+        this.keySlide = value[this.indexSlide].key;
+        this.oldData = value[this.indexSlide].value.data;
+      }
     },
 
     async dataEditor(value) {
