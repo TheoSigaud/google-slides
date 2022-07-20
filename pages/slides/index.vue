@@ -33,7 +33,7 @@
                         </b-card-text>
 
                         <b-button :to="'/slides/'+document.key" variant="primary">Voir</b-button>
-                        <b-button :to="'/revealJs/'+document.key" variant="primary">Disporama</b-button>
+                        <b-button :to="'/revealJs/'+document.key" variant="primary">Diaporama</b-button>
                         <b-button v-on:click="remove(document.key)" variant="danger">Supprimer</b-button>
                     </b-card>
                 </b-col>

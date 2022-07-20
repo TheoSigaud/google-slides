@@ -13,6 +13,7 @@ export default {
     return {
       debug: false,
       slides:[],
+      items: [],
       dataEditor: '',
       id: this.$route.params.id,
     }
@@ -32,6 +33,12 @@ export default {
       await getSlides((slides) => {
         this.slides = [...slides];
       }, this.id);
+      for(var i = 0; i < this.slides.length; i++){
+        var content = this.slides[i].value.data;
+        content = "<section>" + content + "</section>";
+        this.items.push(content);
+      }
+      console.log(this.items);
     },
     async returnData(value){
       this.dataEditor = value;

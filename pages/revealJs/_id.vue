@@ -2,7 +2,7 @@
   <div id="app">
     <div class="reveal">
       <div class="slides">
-        <section v-for="(slide, index) in slides" :key="slide.key">
+        <section v-html="slide.value.data" v-for="(slide, index) in slides" :key="slide.key">
           {{slide.value.data}}
         </section>
       </div>
