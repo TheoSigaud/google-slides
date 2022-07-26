@@ -2,7 +2,7 @@ import { writeDocuments, getDocuments, removeDocument, logout } from "../../fire
 
 export default {
     name: 'DisplaySlides',
-
+    layout: "nav",
     data() {
         return {
             form: {

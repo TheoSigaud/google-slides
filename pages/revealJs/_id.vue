@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <button @click="remove">Test</button>
     <div class="reveal">
       <div class="slides">
         <section v-html="slide.value.data" v-for="(slide, index) in slides" :key="slide.key">
