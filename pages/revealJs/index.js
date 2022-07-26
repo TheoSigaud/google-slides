@@ -6,6 +6,7 @@ import "reveal.js/dist/reveal.css";
 import "reveal.js/dist/theme/black.css";
 import "reveal.js/plugin/highlight/monokai.css";
 import { getSlides} from "../../firebase/firebase";
+import { remove } from '@firebase/database';
 
 export default {
   name: "Diaporama",
@@ -16,11 +17,13 @@ export default {
       items: [],
       dataEditor: '',
       id: this.$route.params.id,
+      rev: null
     }
   },
   mounted: async function() {
     await this.getDoc();
-    Reveal.initialize({
+     this.rev = new Reveal();
+    this.rev.initialize({
       plugins: [Markdown, Highlight],
       markdown: {
         breaks: true,
@@ -42,6 +45,10 @@ export default {
     },
     async returnData(value){
       this.dataEditor = value;
+    },
+    async remove(){
+      this.rev.destroy();
+      this.$router.push("/slides");
     }
   },
 };

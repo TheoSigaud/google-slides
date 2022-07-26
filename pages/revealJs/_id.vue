@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <b-button  variant="primary" @click="remove">Retour</b-button>
     <div class="reveal">
       <div class="slides">
         <section v-html="slide.value.data" v-for="(slide, index) in slides" :key="slide.key">

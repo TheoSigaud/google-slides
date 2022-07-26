@@ -1,12 +1,10 @@
 <template>
     <div>
-        <b-navbar toggleable="lg" type="dark" variant="info">
-            <b-navbar-brand href="#">Google Slides</b-navbar-brand>
-
-            <b-navbar-nav class="ml-auto">
+        
+        <div class=" mt-2 mx-2">
                 <b-button class="btn-slide" type="submit" v-b-modal.modal-1 >Nouveau document</b-button>
-            </b-navbar-nav>
-        </b-navbar>
+        </div>
+   
         <b-modal ok-only id="modal-1" title="Nouvelle présentation" hide-footer>
             <div>
                 <b-form @submit="onSubmit">
