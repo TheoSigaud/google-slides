@@ -17,11 +17,13 @@ export default {
       items: [],
       dataEditor: '',
       id: this.$route.params.id,
+      rev: null
     }
   },
   mounted: async function() {
     await this.getDoc();
-    Reveal.initialize({
+     this.rev = new Reveal();
+    this.rev.initialize({
       plugins: [Markdown, Highlight],
       markdown: {
         breaks: true,
@@ -45,8 +47,7 @@ export default {
       this.dataEditor = value;
     },
     async remove(){
-     
-      Reveal.destroy();
+      this.rev.destroy();
       this.$router.push("/slides");
     }
   },
