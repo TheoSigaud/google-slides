@@ -13,9 +13,7 @@ export default {
     },
     mounted: async function() {
 
-        await getDocuments((documents) => {
-            this.documents = [...documents];
-        });
+        this.getDoc();
     },
 
     methods:{
@@ -30,8 +28,13 @@ export default {
         remove: function(uid){
             removeDocument({uid});
             const card = document.getElementById(uid);
-            card.parentNode.removeChild(card);
+            this.getDoc();
         
+        },
+        async getDoc(){
+            await getDocuments((documents) => {
+                this.documents = [...documents];
+            });
         }
     }
 }

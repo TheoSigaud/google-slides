@@ -22,7 +22,7 @@ export default ({
 
   watch: {
     slides(value) {
-      if(value[this.indexSlide].key){
+      if(value[this.indexSlide]){
         this.keySlide = value[this.indexSlide].key;
         this.oldData = value[this.indexSlide].value.data;
       }
