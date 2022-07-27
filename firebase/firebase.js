@@ -9,6 +9,7 @@ import {
   onValue,
   onChildAdded,
   onChildRemoved,
+  onChildChanged,
 } from "firebase/database";
 import {
   getAuth,
@@ -80,6 +81,26 @@ export async function getSlides(cb = () => {}, id) {
       cb(slides);
     });
 
+  });
+}
+
+export async function detectDelete(cb = () => {}, id) {
+  onAuthStateChanged(auth, (user) => {
+    const slides = [];
+    onChildRemoved(ref(database, "users/" + user.uid + '/documents/' + id + '/slides'), (snapshot) => {
+      slides.push({ value : snapshot.val(), key: snapshot.key });
+      cb(slides);
+    });
+  });
+}
+
+export async function detectChanged(cb = () => {}, id) {
+  onAuthStateChanged(auth, (user) => {
+    const slides = [];
+    onChildChanged(ref(database, "users/" + user.uid + '/documents/' + id + '/slides'), (snapshot) => {
+      slides.push({ value : snapshot.val(), key: snapshot.key });
+      cb(slides);
+    });
   });
 }
 

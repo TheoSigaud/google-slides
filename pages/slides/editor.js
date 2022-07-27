@@ -1,4 +1,4 @@
-import { getSlides, writeSlide, removeSlide, writeData } from "../../firebase/firebase";
+import { detectChanged, detectDelete, getSlides, writeSlide, removeSlide, writeData } from "../../firebase/firebase";
 import Vue from 'vue';
 import CKEditor from '@ckeditor/ckeditor5-vue2';
 
@@ -16,7 +16,8 @@ export default ({
       dataEditor: '',
       keySlide: '',
       oldData: '',
-      indexSlide : 0
+      indexSlide : 0,
+      realTime: false
     }
   },
 
@@ -35,6 +36,8 @@ export default ({
 
   mounted: async function() {
     await this.getDoc();
+    await this.deleteSlide();
+    await this.changedSlide();
   },
 
   methods: {
@@ -45,17 +48,28 @@ export default ({
     async changeSlide(i){
       if (this.debug) console.log("changement de slide " + i)
       this.indexSlide = i;
-      await this.getDoc();
+      this.getDoc();
     },
 
     async deleteSlide(key){
       await removeSlide(this.id, key);
-      await this.getDoc();
     },
 
     async getDoc(){
       await getSlides((slides) => {
         this.slides = [...slides];
+      }, this.id);
+    },
+
+    async deleteSlide(){
+      await detectDelete((result) => {
+        this.getDoc();
+      }, this.id);
+    },
+
+    async changedSlide(){
+      await detectChanged((result) => {
+        this.getDoc();
       }, this.id);
     },
 
